@@ -1,8 +1,25 @@
 manifestVersion: 1
 id: shortcuts-qdrant
 name: qdrant
+tagline: High-Performance Vector Search at Scale
+icon: https://github.com/julio-0/umbrel-app-store/blob/master/shorcuts-qdrant/qdrant-logo-red-black.svg # Pode ser um ícone svg
+category: Development
 version: "1.0.0"
 port: 6333 # Porta que seu container manual usa
-description:
-short: "Atalho para o vector db qdrant."
-icon: https://github.com/julio-0/umbrel-app-store/blob/master/shorcuts-qdrant/qdrant-logo-red-black.svg # Pode ser um ícone svg
+description: "Vector db qdrant."
+short: "db qdrant."
+developer: Qdrant
+website: https://qdrant.tech/
+submitter: Julio
+submission: https://github.com/julio-0/umbrel-shortcuts
+repo: https://github.com/julio-0/umbrel-shortcuts
+support: https://github.com/julio-0/umbrel-shortcuts/issues
+gallery:
+  - https://i.imgur.com/yyVG0Jb.jpeg
+  - https://i.imgur.com/yyVG0Jb.jpeg
+  - https://i.imgur.com/yyVG0Jb.jpeg
+releaseNotes: latest version
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
