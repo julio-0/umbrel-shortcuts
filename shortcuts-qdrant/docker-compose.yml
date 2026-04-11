@@ -1,22 +1,15 @@
-version: '3.8'
+version: 'latest'
 
 services:
   qdrant:
     image: qdrant/qdrant:latest
-    container_name: qdrant
     restart: unless-stopped
     ports:
-      - "6333:6333" # HTTP API & Web UI
-      - "6334:6334" # gRPC API
-    environment:
-      # Optional: Enable API Key security (highly recommended for production)
-      #- QDRANT__SERVICE__API_KEY=your_secret_key_here
-      #- QDRANT__LOG_LEVEL=INFO
+      - "6333:6333"
+      - "6334:6334"
     volumes:
-      - ./qdrant_storage:/qdrant/storage
-      - ./qdrant_snapshots:/qdrant/snapshots
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - qdrant_data:/qdrant/storage
+volumes:
+  qdrant_data:
+
+
