@@ -12,6 +12,6 @@ services:
       - PYTHONUNBUFFERED=1
     # Adicionamos um passo de verificação antes do comando principal
     command: >
-      sh -c "pip install --no-cache-dir notebooklm-mcp-cli && python3 -m notebooklm_mcp_cli.main"      
+      sh -c "pip install notebooklm-mcp-cli && python3 -c 'import notebooklm_mcp_cli; print(\"Success\")' && python3 -m notebooklm_mcp_cli.main"
     volumes:
       - ./data:/app/data
