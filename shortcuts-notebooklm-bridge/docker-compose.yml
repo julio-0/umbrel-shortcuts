@@ -3,7 +3,7 @@ version: '3'
 services:
   notebooklm_bridge:
     # Usar uma imagem com ferramentas de build já inclusas ajuda na compatibilidade
-    image: python:3.10-bullseye 
+    image: python:3.11-bullseye 
     container_name: notebooklm-mcp-bridge
     restart: unless-stopped
     ports:
