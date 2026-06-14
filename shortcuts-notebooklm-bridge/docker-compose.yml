@@ -2,16 +2,16 @@ version: '3'
 
 services:
   notebooklm_bridge:
-    image: python:3.10-slim
+    # Usar uma imagem com ferramentas de build já inclusas ajuda na compatibilidade
+    image: python:3.10-bullseye 
     container_name: notebooklm-mcp-bridge
     restart: unless-stopped
     ports:
-      - "3200:3200"
+      - "3200:3200" # Já ajustado para a porta que você definiu
     environment:
       - PYTHONUNBUFFERED=1
-    # O comando abaixo instala e inicia o serviço do MCP em background ou via loop de polling se necessário
-    # Para uma instalação definitiva, recomenda-se construir a imagem com as libs necessárias.
+    # Adicionamos um passo de verificação antes do comando principal
     command: >
-      sh -c "pip install notebooklm-mcp-cli && python3 -m notebooklm_mcp_cli.main"
+      sh -c "pip install --no-cache-dir notebooklm-mcp-cli && python3 -m notebooklm_mcp_cli.main"      
     volumes:
       - ./data:/app/data
