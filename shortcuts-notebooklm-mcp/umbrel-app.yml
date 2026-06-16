@@ -5,7 +5,7 @@ tagline: Connect OpenClaw to your NotebookLM notes
 icon: https://github.com/julio-0/umbrel-app-store/blob/master/shorcuts-qdrant/qdrant-logo-red-black.svg
 category: Tools
 version: "1.0.0"
-port: 3000
+port: 3200
 description: "A bridge to connect your NotebookLM instance with OpenClaw via Model Context Protocol."
 developer: Umbrel Community
 website: https://github.com/jacob-bd/notebooklm-mcp-cli
