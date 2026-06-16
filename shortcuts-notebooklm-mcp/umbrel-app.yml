@@ -1,6 +1,6 @@
 manifestVersion: 1
-id: shortcuts-notebooklm-bridge
-name: NotebookLM Bridge
+id: shortcuts-notebooklm-mcp
+name: NotebookLM MCP
 tagline: Connect OpenClaw to your NotebookLM notes
 icon: https://github.com/julio-0/umbrel-app-store/blob/master/shorcuts-qdrant/qdrant-logo-red-black.svg
 category: Tools
