@@ -10,7 +10,7 @@
 #       └── chrome-profile/      ← perfil Chrome persistido após auth
 #
 # PORTAS:
-#   3200 → endpoint MCP (Streamable-HTTP) — usado pelo OpenClaw
+#   3220 → endpoint MCP (Streamable-HTTP) — usado pelo OpenClaw
 #   6080 → noVNC (acesso visual ao Chrome para auth inicial)
 #
 # =============================================================================
@@ -49,7 +49,7 @@ services:
     environment:
       # --- Transporte MCP ---
       - NOTEBOOKLM_TRANSPORT=http
-      - NOTEBOOKLM_PORT=3200
+      - NOTEBOOKLM_PORT=3220
       - NOTEBOOKLM_HOST=0.0.0.0   # necessário para acesso da rede Docker/LAN
 
       # --- Display virtual (compartilhado com noVNC) ---
@@ -63,7 +63,8 @@ services:
       # - NOTEBOOKLM_ACCOUNT=default
 
     ports:
-      - "3200:3200"               # endpoint consumido pelo OpenClaw
+      - "3200:3200"               # endpoint do app no Umbrel
+      - "3220:3220"               # endpoint do mcp consumido pelo OpenClaw
 
     volumes:
       # Persiste o perfil Chrome autenticado entre reinicializações
@@ -76,12 +77,12 @@ services:
     # xvfb-run garante display disponível caso o noVNC não esteja acessível
     command: >
       bash -c "
-        export PATH=/usr/local/lib/node_modules/.bin:/usr/local/bin:$$PATH && apt-get update -qq && apt-get install -y --no-install-recommends chromium xvfb xauth fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libcups2 libdbus-1-3 libgbm1 libnss3 libxcomposite1 libxdamage1 libxrandr2 xdg-utils ca-certificates curl 2>/dev/null && npm install -g npx 2>/dev/null || true && echo '✅ Dependências instaladas' && npx --yes notebooklm-mcp@latest --transport http --port 3200 --host 0.0.0.0 
+        export PATH=/usr/local/lib/node_modules/.bin:/usr/local/bin:$$PATH && apt-get update -qq && apt-get install -y --no-install-recommends chromium xvfb xauth fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libcups2 libdbus-1-3 libgbm1 libnss3 libxcomposite1 libxdamage1 libxrandr2 xdg-utils ca-certificates curl 2>/dev/null && npm install -g npx 2>/dev/null || true && echo '✅ Dependências instaladas' && npx --yes notebooklm-mcp@latest --transport http --port 3220 --host 0.0.0.0 
         "
 
     # Saúde do serviço — verifica se o endpoint MCP responde
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:3200/mcp"]
+      test: ["CMD", "curl", "-sf", "http://localhost:3220/mcp"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -113,7 +114,7 @@ networks:
 #     "mcp": {
 #       "servers": {
 #         "notebooklm": {
-#           "url": "http://notebooklm-mcp:3200/mcp",
+#           "url": "http://notebooklm-mcp:3220/mcp",
 #           "transport": "streamable-http",
 #           "timeout": 60
 #         }
@@ -122,5 +123,5 @@ networks:
 #   }
 #
 # Se preferir usar IP da LAN (mais simples, sem compartilhar rede Docker):
-#   "url": "http://192.168.x.x:3200/mcp"
+#   "url": "http://192.168.x.x:3220/mcp"
 # =============================================================================
